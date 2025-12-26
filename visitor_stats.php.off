@@ -1,0 +1,114 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/db.php';
+
+// Функция для получения данных о стране по IP через API
+function getCountryByIp($ip) {
+    $url = "http://ip-api.com/json/{$ip}?fields=country,countryCode";
+    $response = @file_get_contents($url);
+    if ($response === false) {
+        return ['country' => 'Неизвестно', 'countryCode' => ''];
+    }
+    $data = json_decode($response, true);
+    return [
+        'country' => $data['country'] ?? 'Неизвестно',
+        'countryCode' => $data['countryCode'] ?? ''
+    ];
+}
+
+// Получаем последние 10 записей о посетителях
+$visitor_query = $conn->query("
+    SELECT ip_address, page_url, visited_at, country_code, country_name, device_type, browser 
+    FROM visitor_logs 
+    ORDER BY visited_at DESC 
+    LIMIT 10
+");
+$visitors = $visitor_query->fetch_all(MYSQLI_ASSOC);
+
+// Если страна не определена в базе, пытаемся получить её через API
+foreach ($visitors as &$visitor) {
+    if (empty($visitor['country_code']) || empty($visitor['country_name'])) {
+        $geo = getCountryByIp($visitor['ip_address']);
+        $visitor['country_name'] = $geo['country'];
+        $visitor['country_code'] = $geo['countryCode'];
+
+        // Обновляем запись в базе
+        $stmt = $conn->prepare("UPDATE visitor_logs SET country_code = ?, country_name = ? WHERE ip_address = ? AND page_url = ? AND visited_at = ?");
+        $stmt->bind_param("sssss", $visitor['country_code'], $visitor['country_name'], $visitor['ip_address'], $visitor['page_url'], $visitor['visited_at']);
+        $stmt->execute();
+        $stmt->close();
+    }
+}
+
+?>
+
+<div class="card shadow-sm rounded-3 mt-5">
+    <div class="card-header" style="background-color: #26A69A; color: white;">
+        <h5 class="mb-0"><i class="fas fa-globe me-2"></i>Последние посетители</h5>
+    </div>
+    <div class="card-body p-0">
+        <?php if (empty($visitors)): ?>
+            <p class="text-center py-3">Посетителей пока нет.</p>
+        <?php else: ?>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>IP-адрес</th>
+                            <th>Устройство</th>
+                            <th>Браузер</th>
+                            <th>Страна</th>
+                            <th>Страница</th>
+                            <th>Дата и время</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($visitors as $index => $visitor): ?>
+                            <tr>
+                                <td><?php echo $index + 1; ?></td>
+                                <td><?php echo htmlspecialchars($visitor['ip_address']); ?></td>
+                                <td>
+                                    <?php
+                                    switch ($visitor['device_type']) {
+                                        case 'desktop':
+                                            echo '<i class="fas fa-desktop me-1" title="ПК"></i>';
+                                            break;
+                                        case 'tablet':
+                                            echo '<i class="fas fa-tablet-alt me-1" title="Планшет"></i>';
+                                            break;
+                                        case 'mobile':
+                                            echo '<i class="fas fa-mobile-alt me-1" title="Телефон"></i>';
+                                            break;
+                                        default:
+                                            echo '<i class="fas fa-question me-1" title="Неизвестно"></i>';
+                                            break;
+                                    }
+                                    echo ucfirst($visitor['device_type']);
+                                    ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($visitor['browser']); ?></td>
+                                <td>
+                                    <?php if (!empty($visitor['country_code'])): ?>
+                                        <img src="https://flagcdn.com/16x12/<?php echo strtolower($visitor['country_code']); ?>.png" alt="<?php echo htmlspecialchars($visitor['country_name']); ?>" class="me-1">
+                                    <?php endif; ?>
+                                    <?php echo htmlspecialchars($visitor['country_name']); ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($visitor['page_url']); ?></td>
+                                <td><?php echo date('d.m.Y H:i', strtotime($visitor['visited_at'])); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="card-footer text-end">
+        <a href="?module=visitor_stats" class="btn btn-sm" style="background-color: #26A69A; color: white;">Все посетители</a>
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover { background-color: #f1f8ff; }
+    img { vertical-align: middle; }
+    i { vertical-align: middle; }
+</style>

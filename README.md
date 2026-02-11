@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Повний Опис Адміністративної Панелі: Файли, Функціонал та Структура</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f8f9fc; color: #333; }
-        h1, h2 { color: #4361ee; }
-        .section { margin-bottom: 40px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        ul { padding-left: 25px; }
-        li { margin-bottom: 12px; }
-        .english, .norwegian { border-top: 3px solid #4361ee; padding-top: 30px; }
-        code { background: #f1f3f5; padding: 2px 6px; border-radius: 4px; }
-    </style>
-</head>
-<body>
 <h1>Повний Опис Адміністративної Панелі: Файли, Функціонал та Структура</h1>
 <p><strong>Дата оновлення:</strong> 11 лютого 2026<br>
 <strong>Розробник:</strong> Ruslan Bilohash (rbilohash@gmail.com)<br>

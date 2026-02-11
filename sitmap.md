@@ -1,158 +1,129 @@
+English
+Description
+This module is designed for generating, managing, and notifying search engines about sitemaps (sitemap.xml) in the Tender boxed CMS. It supports dynamic domain, XML generation for various content categories (news, products, pages, tenders, etc.), priority settings, file deletion, and pinging search engines (Google, Bing, Yandex).
+Main Features:
 
-    <h1>Sitemap Manager for Tender CMS</h1>
+Sitemap Generation: Automatic creation of XML files for categories and index.
+Search Engine Notification: Sending pings for quick indexing.
+Priority Settings: User interface for setting page priorities (0.1-1.0).
+File Status: Display of existence, update date, and URL count in a table.
+File Deletion: Secure deletion with confirmation.
+Domain Independence: Uses $_SERVER['HTTP_HOST'] for base URL.
 
-    <section id="english">
-        <h2>Description (English)</h2>
-        <p>This module is designed for generating, managing, and notifying search engines about sitemaps (sitemap.xml) in the Tender boxed CMS. It supports dynamic domain, XML generation for various content categories (news, products, pages, tenders, etc.), priority settings, file deletion, and pinging search engines (Google, Bing, Yandex).</p>
+Dependencies:
 
-        <h3>Main Features:</h3>
-        <ul>
-            <li><strong>Sitemap Generation</strong>: Automatic creation of XML files for categories and index.</li>
-            <li><strong>Search Engine Notification</strong>: Sending pings for quick indexing.</li>
-            <li><strong>Priority Settings</strong>: User interface for setting page priorities (0.1-1.0).</li>
-            <li><strong>File Status</strong>: Display of existence, update date, and URL count in a table.</li>
-            <li><strong>File Deletion</strong>: Secure deletion with confirmation.</li>
-            <li><strong>Domain Independence</strong>: Uses <code>$_SERVER['HTTP_HOST']</code> for base URL.</li>
-        </ul>
+PHP 7.4+ (with cURL, SimpleXML extensions).
+MySQL/MariaDB (tables: news, news_categories, shop_products, shop_categories, pages, tenders, categories).
+Files: /includes/db.php (DB connection), /includes/functions.php (function isAdmin()).
 
-        <h3>Dependencies:</h3>
-        <ul>
-            <li>PHP 7.4+ (with cURL, SimpleXML extensions).</li>
-            <li>MySQL/MariaDB (tables: news, news_categories, shop_products, shop_categories, pages, tenders, categories).</li>
-            <li>Files: <code>/includes/db.php</code> (DB connection), <code>/includes/functions.php</code> (function <code>isAdmin()</code>).</li>
-        </ul>
+Installation:
 
-        <h3>Installation:</h3>
-        <ol>
-            <li>Copy <code>sitemap.php</code> to <code>/admin/modules/</code> (or your admin directory).</li>
-            <li>Ensure <code>/uploads/</code> exists and is writable (chmod 755).</li>
-            <li>Add a link in the admin panel: <code>&lt;a href="?module=sitemap"&gt;Sitemap&lt;/a&gt;</code>.</li>
-            <li>Configure robots.txt: <code>Sitemap: https://yourdomain.com/uploads/sitemap.xml</code>.</li>
-        </ol>
+Copy sitemap.php to /admin/modules/ (or your admin directory).
+Ensure /uploads/ exists and is writable (chmod 755).
+Add a link in the admin panel: <a href="?module=sitemap">Sitemap</a>.
+Configure robots.txt: Sitemap: https://yourdomain.com/uploads/sitemap.xml.
 
-        <h3>Usage:</h3>
-        <ul>
-            <li><strong>Generate All</strong>: Click "Generate all maps" – creates all XML and index.</li>
-            <li><strong>By Categories</strong>: Select a category for partial generation.</li>
-            <li><strong>Priorities</strong>: Change values and regenerate (priorities are saved in POST; for persistence, add saving to DB).</li>
-            <li><strong>Notification</strong>: Click "Notify search engines" after generation.</li>
-            <li><strong>Deletion</strong>: Delete file via status table.</li>
-        </ul>
+Usage:
 
-        <h3>Security:</h3>
-        <ul>
-            <li>Only for admins (check <code>isAdmin()</code>).</li>
-            <li>Error logs in error_log for ping diagnostics.</li>
-            <li>No package installation – pure PHP.</li>
-        </ul>
+Generate All: Click "Generate all maps" – creates all XML and index.
+By Categories: Select a category for partial generation.
+Priorities: Change values and regenerate (priorities are saved in POST; for persistence, add saving to DB).
+Notification: Click "Notify search engines" after generation.
+Deletion: Delete file via status table.
 
-        <h3>License</h3>
-        <p>MIT License. Feel free to use and modify.</p>
+Security:
 
-        <h3>Contribution</h3>
-        <p>Pull requests are welcome! Add support for new categories or integration with other search engines.</p>
-    </section>
+Only for admins (check isAdmin()).
+Error logs in error_log for ping diagnostics.
+No package installation – pure PHP.
 
-    <section id="norwegian">
-        <h2>Beskrivelse (Norwegian)</h2>
-        <p>Denne modulen er designet for å generere, administrere og varsle søkemotorer om sitemaps (sitemap.xml) i Tender boxed CMS. Den støtter dynamisk domene, XML-generering for ulike innholdskategorier (nyheter, produkter, sider, anbud, etc.), prioriteringsinnstillinger, filsletting og pinging av søkemotorer (Google, Bing, Yandex).</p>
+License
+MIT License. Feel free to use and modify.
+Contribution
+Pull requests are welcome! Add support for new categories or integration with other search engines.
+Norsk (Norwegian)
+Beskrivelse
+Denne modulen er designet for å generere, administrere og varsle søkemotorer om sitemaps (sitemap.xml) i Tender boxed CMS. Den støtter dynamisk domene, XML-generering for ulike innholdskategorier (nyheter, produkter, sider, anbud, etc.), prioriteringsinnstillinger, filsletting og pinging av søkemotorer (Google, Bing, Yandex).
+Hovedfunksjoner:
 
-        <h3>Hovedfunksjoner:</h3>
-        <ul>
-            <li><strong>Sitemap-generering</strong>: Automatisk opprettelse av XML-filer for kategorier og indeks.</li>
-            <li><strong>Varsling av søkemotorer</strong>: Sending av pings for rask indeksering.</li>
-            <li><strong>Prioriteringsinnstillinger</strong>: Brukergrensesnitt for å sette sideprioriteringer (0.1-1.0).</li>
-            <li><strong>Filstatus</strong>: Visning av eksistens, oppdateringsdato og URL-antall i en tabell.</li>
-            <li><strong>Filsletting</strong>: Sikker sletting med bekreftelse.</li>
-            <li><strong>Domeneuavhengighet</strong>: Bruker <code>$_SERVER['HTTP_HOST']</code> for base-URL.</li>
-        </ul>
+Sitemap-generering: Automatisk opprettelse av XML-filer for kategorier og indeks.
+Varsling av søkemotorer: Sending av pings for rask indeksering.
+Prioriteringsinnstillinger: Brukergrensesnitt for å sette sideprioriteringer (0.1-1.0).
+Filstatus: Visning av eksistens, oppdateringsdato og URL-antall i en tabell.
+Filsletting: Sikker sletting med bekreftelse.
+Domeneuavhengighet: Bruker $_SERVER['HTTP_HOST'] for base-URL.
 
-        <h3>Avhengigheter:</h3>
-        <ul>
-            <li>PHP 7.4+ (med cURL, SimpleXML-utvidelser).</li>
-            <li>MySQL/MariaDB (tabeller: news, news_categories, shop_products, shop_categories, pages, tenders, categories).</li>
-            <li>Filer: <code>/includes/db.php</code> (DB-tilkobling), <code>/includes/functions.php</code> (funksjon <code>isAdmin()</code>).</li>
-        </ul>
+Avhengigheter:
 
-        <h3>Installasjon:</h3>
-        <ol>
-            <li>Kopier <code>sitemap.php</code> til <code>/admin/modules/</code> (eller din admin-katalog).</li>
-            <li>Sørg for at <code>/uploads/</code> eksisterer og er skrivbar (chmod 755).</li>
-            <li>Legg til en lenke i adminpanelet: <code>&lt;a href="?module=sitemap"&gt;Sitemap&lt;/a&gt;</code>.</li>
-            <li>Konfigurer robots.txt: <code>Sitemap: https://yourdomain.com/uploads/sitemap.xml</code>.</li>
-        </ol>
+PHP 7.4+ (med cURL, SimpleXML-utvidelser).
+MySQL/MariaDB (tabeller: news, news_categories, shop_products, shop_categories, pages, tenders, categories).
+Filer: /includes/db.php (DB-tilkobling), /includes/functions.php (funksjon isAdmin()).
 
-        <h3>Bruk:</h3>
-        <ul>
-            <li><strong>Generer alle</strong>: Klikk "Generer alle kart" – oppretter alle XML og indeks.</li>
-            <li><strong>Etter kategorier</strong>: Velg en kategori for delvis generering.</li>
-            <li><strong>Prioriteringer</strong>: Endre verdier og regenerer (prioriteringer lagres i POST; for persistens, legg til lagring i DB).</li>
-            <li><strong>Varsling</strong>: Klikk "Varsle søkemotorer" etter generering.</li>
-            <li><strong>Sletting</strong>: Slett fil via status-tabell.</li>
-        </ul>
+Installasjon:
 
-        <h3>Sikkerhet:</h3>
-        <ul>
-            <li>Kun for administratorer (sjekk <code>isAdmin()</code>).</li>
-            <li>Feillogger i error_log for ping-diagnostikk.</li>
-            <li>Ingen pakkeinstallasjon – ren PHP.</li>
-        </ul>
+Kopier sitemap.php til /admin/modules/ (eller din admin-katalog).
+Sørg for at /uploads/ eksisterer og er skrivbar (chmod 755).
+Legg til en lenke i adminpanelet: <a href="?module=sitemap">Sitemap</a>.
+Konfigurer robots.txt: Sitemap: https://yourdomain.com/uploads/sitemap.xml.
 
-        <h3>Lisens</h3>
-        <p>MIT-lisens. Bruk og modifiser fritt.</p>
+Bruk:
 
-        <h3>Bidrag</h3>
-        <p>Pull requests er velkomne! Legg til støtte for nye kategorier eller integrasjon med andre søkemotorer.</p>
-    </section>
+Generer alle: Klikk "Generer alle kart" – oppretter alle XML og indeks.
+Etter kategorier: Velg en kategori for delvis generering.
+Prioriteringer: Endre verdier og regenerer (prioriteringer lagres i POST; for persistens, legg til lagring i DB).
+Varsling: Klikk "Varsle søkemotorer" etter generering.
+Sletting: Slett fil via status-tabell.
 
-    <section id="ukrainian">
-        <h2>Опис (Ukrainian)</h2>
-        <p>Цей модуль призначений для генерації, керування та сповіщення пошукових систем про карти сайту (sitemap.xml) у коробковій CMS Tender. Він підтримує динамічний домен, генерацію XML для різних категорій контенту (новини, товари, сторінки, тендери тощо), налаштування пріоритетів, видалення файлів та пінг пошуковиків (Google, Bing, Yandex).</p>
+Sikkerhet:
 
-        <h3>Основні функції:</h3>
-        <ul>
-            <li><strong>Генерація sitemap</strong>: Автоматичне створення XML-файлів для категорій та індексу.</li>
-            <li><strong>Сповіщення пошуковиків</strong>: Надсилання пінгів для швидкої індексації.</li>
-            <li><strong>Налаштування пріоритетів</strong>: Інтерфейс користувача для встановлення пріоритетів сторінок (0.1-1.0).</li>
-            <li><strong>Статус файлів</strong>: Відображення наявності, дати оновлення та кількості URL у таблиці.</li>
-            <li><strong>Видалення файлів</strong>: Безпечне видалення з підтвердженням.</li>
-            <li><strong>Незалежність від домену</strong>: Використовує <code>$_SERVER['HTTP_HOST']</code> для базового URL.</li>
-        </ul>
+Kun for administratorer (sjekk isAdmin()).
+Feillogger i error_log for ping-diagnostikk.
+Ingen pakkeinstallasjon – ren PHP.
 
-        <h3>Залежності:</h3>
-        <ul>
-            <li>PHP 7.4+ (з розширеннями cURL, SimpleXML).</li>
-            <li>MySQL/MariaDB (таблиці: news, news_categories, shop_products, shop_categories, pages, tenders, categories).</li>
-            <li>Файли: <code>/includes/db.php</code> (підключення БД), <code>/includes/functions.php</code> (функція <code>isAdmin()</code>).</li>
-        </ul>
+Lisens
+MIT-lisens. Bruk og modifiser fritt.
+Bidrag
+Pull requests er velkomne! Legg til støtte for nye kategorier eller integrasjon med andre søkemotorer.
+Українська (Ukrainian)
+Опис
+Цей модуль призначений для генерації, керування та сповіщення пошукових систем про карти сайту (sitemap.xml) у коробковій CMS Tender. Він підтримує динамічний домен, генерацію XML для різних категорій контенту (новини, товари, сторінки, тендери тощо), налаштування пріоритетів, видалення файлів та пінг пошуковиків (Google, Bing, Yandex).
+Основні функції:
 
-        <h3>Встановлення:</h3>
-        <ol>
-            <li>Скопіюйте <code>sitemap.php</code> до <code>/admin/modules/</code> (або вашої директорії адмінки).</li>
-            <li>Переконайтеся, що <code>/uploads/</code> існує та доступна для запису (chmod 755).</li>
-            <li>Додайте посилання в адмін-панелі: <code>&lt;a href="?module=sitemap"&gt;Sitemap&lt;/a&gt;</code>.</li>
-            <li>Налаштуйте robots.txt: <code>Sitemap: https://yourdomain.com/uploads/sitemap.xml</code>.</li>
-        </ol>
+Генерація sitemap: Автоматичне створення XML-файлів для категорій та індексу.
+Сповіщення пошуковиків: Надсилання пінгів для швидкої індексації.
+Налаштування пріоритетів: Інтерфейс користувача для встановлення пріоритетів сторінок (0.1-1.0).
+Статус файлів: Відображення наявності, дати оновлення та кількості URL у таблиці.
+Видалення файлів: Безпечне видалення з підтвердженням.
+Незалежність від домену: Використовує $_SERVER['HTTP_HOST'] для базового URL.
 
-        <h3>Використання:</h3>
-        <ul>
-            <li><strong>Генерація всіх</strong>: Натисніть "Сгенерировать все карты" – створює всі XML та індекс.</li>
-            <li><strong>За категоріями</strong>: Оберіть категорію для часткової генерації.</li>
-            <li><strong>Пріоритети</strong>: Змініть значення та регенеруйте (пріоритети зберігаються в POST; для персистентності додайте збереження в БД).</li>
-            <li><strong>Сповіщення</strong>: Натисніть "Известить поисковые системы" після генерації.</li>
-            <li><strong>Видалення</strong>: Видаліть файл через таблицю статусу.</li>
-        </ul>
+Залежності:
 
-        <h3>Безпека:</h3>
-        <ul>
-            <li>Тільки для адмінів (перевірка <code>isAdmin()</code>).</li>
-            <li>Логи помилок в error_log для діагностики пінгів.</li>
-            <li>Без встановлення пакетів – чистий PHP.</li>
-        </ul>
+PHP 7.4+ (з розширеннями cURL, SimpleXML).
+MySQL/MariaDB (таблиці: news, news_categories, shop_products, shop_categories, pages, tenders, categories).
+Файли: /includes/db.php (підключення БД), /includes/functions.php (функція isAdmin()).
 
-        <h3>Ліцензія</h3>
-        <p>MIT License. Вільно використовуйте та модифікуйте.</p>
+Встановлення:
 
-        <h3>Внесок</h3>
-        <p>Pull requests вітаються! Додайте підтримку нових категорій або інтеграцію з іншими пошуковиками.</p>
-    </section>
+Скопіюйте sitemap.php до /admin/modules/ (або вашої директорії адмінки).
+Переконайтеся, що /uploads/ існує та доступна для запису (chmod 755).
+Додайте посилання в адмін-панелі: <a href="?module=sitemap">Sitemap</a>.
+Налаштуйте robots.txt: Sitemap: https://yourdomain.com/uploads/sitemap.xml.
+
+Використання:
+
+Генерація всіх: Натисніть "Сгенерировать все карты" – створює всі XML та індекс.
+За категоріями: Оберіть категорію для часткової генерації.
+Пріоритети: Змініть значення та регенеруйте (пріоритети зберігаються в POST; для персистентності додайте збереження в БД).
+Сповіщення: Натисніть "Известить поисковые системы" після генерації.
+Видалення: Видаліть файл через таблицю статусу.
+
+Безпека:
+
+Тільки для адмінів (перевірка isAdmin()).
+Логи помилок в error_log для діагностики пінгів.
+Без встановлення пакетів – чистий PHP.
+
+Ліцензія
+MIT License. Вільно використовуйте та модифікуйте.
+Внесок
+Pull requests вітаються! Додайте підтримку нових категорій або інтеграцію з іншими пошуковиками.

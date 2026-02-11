@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Повний Опис Модуля Панелі Управління Адміністраторами</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f8f9fc; color: #333; }
+        h1, h2 { color: #4361ee; }
+        .section { margin-bottom: 40px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        ul { padding-left: 25px; }
+        li { margin-bottom: 12px; }
+        .english, .norwegian { border-top: 3px solid #4361ee; padding-top: 30px; }
+        code { background: #f1f3f5; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<h1>Повний Опис Модуля Панелі Управління Адміністраторами: Файли, Функціонал та Структура</h1>
+<p><strong>Дата оновлення:</strong> 11 лютого 2026<br>
+<strong>Розробник:</strong> Ruslan Bilohash (rbilohash@gmail.com)<br>
+<strong>Проект:</strong> Панель управління адміністраторами (додавання, редагування, видалення облікових записів адміністраторів)</p>
+<div class="section">
+    <h2>Українська версія</h2>
+    <h3>Загальний огляд</h3>
+    <p>Модуль Панелі Управління Адміністраторами — це адміністративний інструмент для керування обліковими записами адміністраторів. Він дозволяє додавати, редагувати та видаляти адміністраторів. Використовується PHP 8.1+, MySQL з PDO, хешування паролів (PASSWORD_BCRYPT), перевірка доступу, форми з модальними вікнами, адаптивний дизайн з Bootstrap-стилем. Модуль забезпечує безпеку через екранування вхідних даних та підготовлені запити. Інтерфейс покращено іконками Font Awesome, градієнтами та адаптивністю для мобільних пристроїв.</p>
+    <h3>Список файлів та їх призначення</h3>
+    <ul>
+        <li><strong>admins.php</strong> — Основний файл модуля: логіка перевірки доступу, обробка форм (додавання, редагування, видалення), вивід списку адміністраторів, HTML-інтерфейс з формами та модальними вікнами.</li>
+        <li><strong>db.php</strong> — Підключення до бази даних (використовується для $conn).</li>
+        <li><strong>functions.php</strong> — Функції, включаючи isAdmin() для перевірки доступу.</li>
+    </ul>
+    <h3>Основний функціонал</h3>
+    <ul>
+        <li>Перевірка доступу: Якщо не адміністратор, перенаправлення на логін.</li>
+        <li>Додавання адміністратора: Форма з логіном та паролем, хешування пароля, вставка в таблицю admins.</li>
+        <li>Редагування адміністратора: Модальне вікно для зміни логіна та (опціонально) пароля.</li>
+        <li>Видалення адміністратора: Через GET-параметр з підтвердженням.</li>
+        <li>Список адміністраторів: Таблиця з ID, логіном, датою створення та діями (редагувати/видалити).</li>
+        <li>Вивід повідомлень про успіх/помилку з іконками.</li>
+        <li>Отримання імені поточного адміністратора (за ID=1, з fallback на 'Фади').</li>
+        <li>Адаптивний дизайн: Стилі для мобільних пристроїв, градієнти, іконки Font Awesome, покращена UX з input-group.</li>
+        <li>Безпека: Підготовлені запити, екранування, хешування паролів, підтвердження видалення.</li>
+    </ul>
+</div>
+<div class="section english">
+    <h2>English Version</h2>
+    <h3>General Overview</h3>
+    <p>The Admin Management Panel module is an administrative tool for managing admin accounts. It allows adding, editing, and deleting administrators. Uses PHP 8.1+, MySQL with PDO, password hashing (PASSWORD_BCRYPT), access check, forms with modals, responsive design with Bootstrap-style. The module ensures security through input escaping and prepared statements. Interface improved with Font Awesome icons, gradients, and mobile adaptability.</p>
+    <h3>List of Files and Their Purpose</h3>
+    <ul>
+        <li><strong>admins.php</strong> — Main module file: access check logic, form handling (add, edit, delete), output of admins list, HTML interface with forms and modals.</li>
+        <li><strong>db.php</strong> — Database connection (used for $conn).</li>
+        <li><strong>functions.php</strong> — Functions, including isAdmin() for access check.</li>
+    </ul>
+    <h3>Main Functionality</h3>
+    <ul>
+        <li>Access check: If not admin, redirect to login.</li>
+        <li>Adding admin: Form with username and password, password hashing, insert into admins table.</li>
+        <li>Editing admin: Modal for changing username and (optionally) password.</li>
+        <li>Deleting admin: Via GET parameter with confirmation.</li>
+        <li>List of admins: Table with ID, username, creation date, and actions (edit/delete).</li>
+        <li>Display success/error messages with icons.</li>
+        <li>Fetch current admin name (by ID=1, with fallback to 'Fadi').</li>
+        <li>Responsive design: Styles for mobile, gradients, Font Awesome icons, enhanced UX with input-group.</li>
+        <li>Security: Prepared statements, escaping, password hashing, delete confirmation.</li>
+    </ul>
+</div>
+<div class="section norwegian">
+    <h2>Norsk Versjon</h2>
+    <h3>Generell Oversikt</h3>
+    <p>Admin Management Panel-modulen er et administrativt verktøy for å administrere admin-kontoer. Den tillater å legge til, redigere og slette administratorer. Bruker PHP 8.1+, MySQL med PDO, passordhashing (PASSWORD_BCRYPT), tilgangskontroll, skjemaer med modale vinduer, responsiv design med Bootstrap-stil. Modulen sikrer sikkerhet gjennom input-escaping og forberedte spørringer. Grensesnittet er forbedret med Font Awesome-ikoner, gradienter og mobiltilpasning.</p>
+    <h3>Liste over Filer og Deres Formål</h3>
+    <ul>
+        <li><strong>admins.php</strong> — Hovedmodulfil: logikk for tilgangskontroll, håndtering av skjemaer (legg til, rediger, slett), utdata av admin-liste, HTML-grensesnitt med skjemaer og modale vinduer.</li>
+        <li><strong>db.php</strong> — Databaseforbindelse (brukes for $conn).</li>
+        <li><strong>functions.php</strong> — Funksjoner, inkludert isAdmin() for tilgangskontroll.</li>
+    </ul>
+    <h3>Hovedfunksjonalitet</h3>
+    <ul>
+        <li>Tilgangskontroll: Hvis ikke admin, omdiriger til innlogging.</li>
+        <li>Legge til admin: Skjema med brukernavn og passord, passordhashing, sett inn i admins-tabell.</li>
+        <li>Redigere admin: Modalt vindu for å endre brukernavn og (valgfritt) passord.</li>
+        <li>Slette admin: Via GET-parameter med bekreftelse.</li>
+        <li>Liste over admins: Tabell med ID, brukernavn, opprettelsesdato og handlinger (rediger/slett).</li>
+        <li>Vis suksess/feilmeldinger med ikoner.</li>
+        <li>Hent gjeldende admin-navn (etter ID=1, med fallback til 'Fadi').</li>
+        <li>Responsiv design: Stiler for mobil, gradienter, Font Awesome-ikoner, forbedret UX med input-group.</li>
+        <li>Sikkerhet: Forberedte spørringer, escaping, passordhashing, slettbekreftelse.</li>
+    </ul>
+</div>
+</body>
+</html>
